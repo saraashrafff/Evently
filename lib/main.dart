@@ -6,6 +6,8 @@ void main() {
 }
 
 class Evently extends StatelessWidget {
+  const Evently({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
