@@ -26,8 +26,9 @@ class StartOnboarding extends StatelessWidget {
             OnboardingItem(onboarding: onboardingPages[0], index: 0),
             Spacer(),
             DefaultElevatedButton(
-              text: 'Let\'s Start',
-              onTap: () {
+              label: 'Let\'s Start',
+              style: Theme.of(context).textTheme.titleLarge,
+              onPressed: () {
                 Navigator.of(
                   context,
                 ).pushReplacementNamed(OnboardingScreens.routeName);

@@ -25,18 +25,21 @@ class AppTheme {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.symmetric(vertical: 16),
         backgroundColor: primary,
-        foregroundColor: white,
-        textStyle: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.w500,
-          color: white,
-        ),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       ),
     ),
-
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        foregroundColor: primary,
+        textStyle: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+          fontStyle: FontStyle.italic,
+          decoration: TextDecoration.underline,
+        ),
+      ),
+    ),
     inputDecorationTheme: InputDecorationTheme(
       hintStyle: TextStyle(
         color: grey,
@@ -61,15 +64,15 @@ class AppTheme {
       ),
     ),
     textTheme: TextTheme(
-      titleMedium: TextStyle(
+      titleLarge: TextStyle(
         fontSize: 20,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w500,
         color: white,
       ),
-      titleSmall: TextStyle(
+      titleMedium: TextStyle(
         fontSize: 16,
-        fontWeight: FontWeight.bold,
-        color: white,
+        fontWeight: FontWeight.w500,
+        color: black,
       ),
     ),
   );

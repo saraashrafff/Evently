@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 
 class DefaultElevatedButton extends StatelessWidget {
-  String text;
-  VoidCallback onTap;
+  String label;
+  VoidCallback onPressed;
 
-  DefaultElevatedButton({super.key, required this.text, required this.onTap});
+  DefaultElevatedButton({required this.label, required this.onPressed, TextStyle? style});
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-
-      child: ElevatedButton(onPressed: onTap, child: Text(text)),
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        fixedSize: Size(MediaQuery.sizeOf(context).width, 56),
+      ),
+      child: Text(label, style: Theme.of(context).textTheme.titleLarge),
     );
   }
 }
