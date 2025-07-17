@@ -10,6 +10,7 @@ class AppTheme {
   static const Color white = Color(0xFFF4EBDC);
 
   static ThemeData lightTheme = ThemeData(
+    scaffoldBackgroundColor: backgroundLight,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: primary,
       type: BottomNavigationBarType.fixed,
@@ -21,6 +22,55 @@ class AppTheme {
       foregroundColor: white,
       shape: CircleBorder(),
       // shape: CircleBorder(side: BorderSide(width: 5, color: white)),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        padding: EdgeInsets.symmetric(vertical: 16),
+        backgroundColor: primary,
+        foregroundColor: white,
+        textStyle: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w500,
+          color: white,
+        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      ),
+    ),
+
+    inputDecorationTheme: InputDecorationTheme(
+      hintStyle: TextStyle(
+        color: grey,
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: grey),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: grey),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: red),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: red),
+        borderRadius: BorderRadius.circular(16),
+      ),
+    ),
+    textTheme: TextTheme(
+      titleMedium: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+        color: white,
+      ),
+      titleSmall: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+        color: white,
+      ),
     ),
   );
   static ThemeData darkTheme = ThemeData();
