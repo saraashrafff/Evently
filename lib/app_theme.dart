@@ -47,11 +47,11 @@ class AppTheme {
         fontWeight: FontWeight.w500,
       ),
       enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: grey),
+        borderSide: BorderSide(color: primary),
         borderRadius: BorderRadius.circular(16),
       ),
       focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: grey),
+        borderSide: BorderSide(color: primary),
         borderRadius: BorderRadius.circular(16),
       ),
       errorBorder: OutlineInputBorder(
