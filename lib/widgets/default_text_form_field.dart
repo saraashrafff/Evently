@@ -6,18 +6,22 @@ class DefaultTextFormField extends StatelessWidget {
   TextEditingController? controller;
   void Function(String)? onChanged;
   String? prefixIconImageName;
+  String? Function(String?)? validator;
 
-  DefaultTextFormField({super.key, 
+  DefaultTextFormField({
+    super.key,
     required this.hintText,
     this.controller,
     this.onChanged,
     this.prefixIconImageName,
+    this.validator,
   });
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
       onChanged: onChanged,
+      validator: validator,
       decoration: InputDecoration(
         hintText: hintText,
         prefixIcon: prefixIconImageName == null

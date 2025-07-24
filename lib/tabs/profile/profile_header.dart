@@ -14,7 +14,11 @@ class ProfileHeader extends StatelessWidget {
       child: SafeArea(
         child: Row(
           children: [
-            Image.asset('assets/images/route_logo.png'),
+            Image.asset(
+              'assets/images/route_logo.png',
+              height: MediaQuery.sizeOf(context).height * 0.12,
+              fit: BoxFit.fill,
+            ),
             SizedBox(width: 16),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
