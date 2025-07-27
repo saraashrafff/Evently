@@ -5,11 +5,13 @@ import 'package:evently/create_event_screen.dart';
 import 'package:evently/home_screen.dart';
 import 'package:evently/onboarding/onboarding_screens.dart';
 import 'package:evently/onboarding/start_onboarding.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool isFirstRun = prefs.getBool('isFirstRun') ?? true;
   runApp(Evently(isFirstRun: isFirstRun));
