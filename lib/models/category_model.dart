@@ -53,19 +53,19 @@ class CategoryModel {
       id: '8',
       name: 'Exihibtion',
       icon: Icons.image,
-      imageName: 'exihibtion',
+      imageName: 'exhibition',
     ),
     CategoryModel(
       id: '7',
       name: 'WorkShop',
       icon: Icons.handyman,
-      imageName: 'workShop',
+      imageName: 'workshop',
     ),
     CategoryModel(
       id: '9',
       name: 'BookClub',
       icon: Icons.library_books,
-      imageName: 'bookClub',
+      imageName: 'bookclub',
     ),
   ];
 }

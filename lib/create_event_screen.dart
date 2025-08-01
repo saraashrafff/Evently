@@ -1,10 +1,14 @@
 import 'package:evently/app_theme.dart';
+import 'package:evently/firebase_service.dart';
 import 'package:evently/models/category_model.dart';
+import 'package:evently/models/event_model.dart';
 import 'package:evently/tabs/home/tab_item.dart';
 import 'package:evently/widgets/default_elevated_button.dart';
 import 'package:evently/widgets/default_text_form_field.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 
 class CreateEventScreen extends StatefulWidget {
   static const String routeName = '/create-event';
@@ -17,7 +21,11 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
   int currentIndex = 0;
   TextEditingController titleController = TextEditingController();
   TextEditingController describtionController = TextEditingController();
+  CategoryModel selectedCategory = CategoryModel.categories.first;
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
+  DateTime? selectedDate;
+  TimeOfDay? selectedTime;
+  DateFormat dateFormat = DateFormat('d/M/yyyy');
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
@@ -32,7 +40,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: Image.asset(
-                  'assets/images/meeting.png',
+                  'assets/images/${selectedCategory.imageName}.png',
                   height: MediaQuery.sizeOf(context).height * 0.23,
                   width: double.infinity,
                   fit: BoxFit.fill,
@@ -51,6 +59,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                 onTap: (index) {
                   if (currentIndex == index) return;
                   currentIndex = index;
+                  selectedCategory = CategoryModel.categories[currentIndex];
                   setState(() {});
                 },
                 tabs: CategoryModel.categories
@@ -95,7 +104,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                     controller: describtionController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Describition cannot be empty';
+                        return 'Descripition cannot be empty';
                       }
                       return null;
                     },
@@ -115,9 +124,15 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                             lastDate: DateTime.now().add(Duration(days: 365)),
                             initialEntryMode: DatePickerEntryMode.calendarOnly,
                           );
+                          if (date != null) {
+                            selectedDate = date;
+                            setState(() {});
+                          }
                         },
                         child: Text(
-                          'Select Date',
+                          selectedDate == null
+                              ? 'Select Date'
+                              : dateFormat.format(selectedDate!),
                           style: textTheme.titleMedium!.copyWith(
                             color: AppTheme.primary,
                           ),
@@ -138,9 +153,15 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                             context: context,
                             initialTime: TimeOfDay.now(),
                           );
+                          if (time != null) {
+                            selectedTime = time;
+                            setState(() {});
+                          }
                         },
                         child: Text(
-                          'Select Time',
+                          selectedTime == null
+                              ? 'Select Time'
+                              : selectedTime!.format(context),
                           style: textTheme.titleMedium!.copyWith(
                             color: AppTheme.primary,
                           ),
@@ -163,6 +184,25 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
   }
 
   void createEvent() {
-    if (formkey.currentState!.validate()) {}
+    if (formkey.currentState!.validate() &&
+        selectedDate != null &&
+        selectedTime != null) {
+      DateTime dateTime = DateTime(
+        selectedDate!.year,
+        selectedDate!.month,
+        selectedDate!.day,
+        selectedTime!.hour,
+        selectedTime!.minute,
+      );
+      EventModel event = EventModel(
+        category: selectedCategory,
+        title: titleController.text,
+        description: describtionController.text,
+        dateTime: dateTime,
+      );
+      FirebaseService.creatEvent(
+        event,
+      ).then((_) => Navigator.of(context).pop());
+    }
   }
 }
