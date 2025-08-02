@@ -1,6 +1,9 @@
 import 'package:evently/auth/login_screen.dart';
+import 'package:evently/firebase_service.dart';
+import 'package:evently/home_screen.dart';
 import 'package:evently/widgets/default_elevated_button.dart';
 import 'package:evently/widgets/default_text_form_field.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -71,5 +74,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  void register() {}
+  void register() {
+    print('Register button pressed'); // Add this
+
+    FirebaseService.register(
+      name: nameController.text,
+      email: emailController.text,
+      password: passwordController.text,
+    ).then(
+      (user) =>
+          Navigator.of(context).pushReplacementNamed(HomeScreen.routeName),
+    );
+  }
 }
