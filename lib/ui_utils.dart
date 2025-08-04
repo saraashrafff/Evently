@@ -11,7 +11,7 @@ class UIUtils {
     textColor: AppTheme.white,
     fontSize: 16.0,
   );
-  static void showErrorMessege(String? messege) => Fluttertoast.showToast(
+  static void showErrorMessege([String? messege]) => Fluttertoast.showToast(
     msg: messege ?? 'Something went wrong',
     toastLength: Toast.LENGTH_SHORT,
     gravity: ToastGravity.BOTTOM,
