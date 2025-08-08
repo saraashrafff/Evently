@@ -1,11 +1,11 @@
 import 'package:evently/app_theme.dart';
 import 'package:evently/models/category_model.dart';
+import 'package:evently/providers/events_provider.dart';
 import 'package:evently/tabs/home/tab_item.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeHeader extends StatefulWidget {
-  void Function(CategoryModel?) filterEvents;
-  HomeHeader({required this.filterEvents});
   @override
   State<HomeHeader> createState() => _HomeHeaderState();
 }
@@ -14,6 +14,7 @@ class _HomeHeaderState extends State<HomeHeader> {
   int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
+    EventProvider eventProvider = Provider.of<EventProvider>(context);
     TextTheme textTheme = Theme.of(context).textTheme;
     return Container(
       decoration: BoxDecoration(
@@ -45,7 +46,7 @@ class _HomeHeaderState extends State<HomeHeader> {
                   CategoryModel? selectedCategory = currentIndex == 0
                       ? null
                       : CategoryModel.categories[currentIndex - 1];
-                  widget.filterEvents(selectedCategory);
+                  eventProvider.filterEvents(selectedCategory);
                   setState(() {});
                 },
                 tabs: [
