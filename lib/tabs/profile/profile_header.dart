@@ -1,5 +1,7 @@
 import 'package:evently/app_theme.dart';
+import 'package:evently/providers/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProfileHeader extends StatelessWidget {
   @override
@@ -23,10 +25,13 @@ class ProfileHeader extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('User Name', style: textTheme.headlineSmall),
+                Text(
+                  Provider.of<UserProvider>(context).currentUser!.name,
+                  style: textTheme.headlineSmall,
+                ),
                 SizedBox(height: 10),
                 Text(
-                  'userEmail@gmail.com',
+                  Provider.of<UserProvider>(context).currentUser!.email,
                   style: textTheme.titleMedium!.copyWith(color: AppTheme.white),
                 ),
               ],

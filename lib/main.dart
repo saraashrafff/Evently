@@ -6,6 +6,7 @@ import 'package:evently/home_screen.dart';
 import 'package:evently/onboarding/onboarding_screens.dart';
 import 'package:evently/onboarding/start_onboarding.dart';
 import 'package:evently/providers/events_provider.dart';
+import 'package:evently/providers/user_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,8 +18,11 @@ void main() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool isFirstRun = prefs.getBool('isFirstRun') ?? true;
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => EventProvider()..getEvents(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => EventProvider()..getEvents()),
+        ChangeNotifierProvider(create: (_) => UserProvider()),
+      ],
       child: Evently(isFirstRun: isFirstRun),
     ),
   );

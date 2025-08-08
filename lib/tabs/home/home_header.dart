@@ -1,7 +1,10 @@
 import 'package:evently/app_theme.dart';
 import 'package:evently/models/category_model.dart';
+import 'package:evently/models/user_model.dart';
 import 'package:evently/providers/events_provider.dart';
+import 'package:evently/providers/user_provider.dart';
 import 'package:evently/tabs/home/tab_item.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -30,7 +33,10 @@ class _HomeHeaderState extends State<HomeHeader> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Welcome Back ✨', style: textTheme.titleSmall),
-            Text('User Name', style: textTheme.headlineSmall),
+            Text(
+              Provider.of<UserProvider>(context).currentUser!.name,
+              style: textTheme.headlineSmall,
+            ),
             SizedBox(height: 16),
             DefaultTabController(
               length: CategoryModel.categories.length + 1,
