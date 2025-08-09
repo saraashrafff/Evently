@@ -97,5 +97,92 @@ class AppTheme {
       ),
     ),
   );
-  static ThemeData darkTheme = ThemeData();
+  static ThemeData darkTheme = ThemeData(
+    scaffoldBackgroundColor: backgroundDark,
+    appBarTheme: AppBarTheme(
+      backgroundColor: backgroundDark,
+      centerTitle: true,
+      titleTextStyle: TextStyle(
+        fontSize: 22,
+        fontWeight: FontWeight.w500,
+        color: primary,
+      ),
+      iconTheme: IconThemeData(color: primary),
+    ),
+
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: backgroundDark,
+      type: BottomNavigationBarType.fixed,
+      selectedItemColor: white,
+      unselectedItemColor: white,
+    ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: backgroundDark,
+      foregroundColor: white,
+      // shape: CircleBorder(),
+      shape: CircleBorder(side: BorderSide(width: 5, color: white)),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: primary,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      ),
+    ),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        foregroundColor: primary,
+        textStyle: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+          fontStyle: FontStyle.italic,
+          decoration: TextDecoration.underline,
+        ),
+      ),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      hintStyle: TextStyle(
+        color: white,
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: primary),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: primary),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: red),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: red),
+        borderRadius: BorderRadius.circular(16),
+      ),
+    ),
+    textTheme: TextTheme(
+      headlineSmall: TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+        color: white,
+      ),
+      titleLarge: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.w500,
+        color: white,
+      ),
+      titleSmall: TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        color: white,
+      ),
+      titleMedium: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        color: white,
+      ),
+    ),
+  );
 }

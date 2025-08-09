@@ -1,4 +1,5 @@
 import 'package:evently/providers/events_provider.dart';
+import 'package:evently/providers/settings_provider.dart';
 import 'package:evently/providers/user_provider.dart';
 import 'package:evently/widgets/default_text_form_field.dart';
 import 'package:evently/widgets/event_item.dart';
@@ -26,6 +27,8 @@ class _LoveTabState extends State<LoveTab> {
 
   @override
   Widget build(BuildContext context) {
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
+
     eventsProvider = Provider.of<EventProvider>(context);
     return SafeArea(
       child: Padding(

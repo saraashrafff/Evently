@@ -1,6 +1,8 @@
 import 'package:evently/app_theme.dart';
+import 'package:evently/providers/settings_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 class DefaultTextFormField extends StatefulWidget {
   String hintText;
@@ -29,11 +31,14 @@ class _DefaultTextFormFieldState extends State<DefaultTextFormField> {
 
   @override
   Widget build(BuildContext context) {
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
+
     return TextFormField(
       obscureText: isObscure,
       controller: widget.controller,
       onChanged: widget.onChanged,
       validator: widget.validator,
+      style: Theme.of(context).textTheme.titleMedium,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
       decoration: InputDecoration(
@@ -45,6 +50,14 @@ class _DefaultTextFormFieldState extends State<DefaultTextFormField> {
                 height: 24,
                 width: 24,
                 fit: BoxFit.scaleDown,
+                colorFilter: ColorFilter.mode(
+                  widget.prefixIconImageName == 'search'
+                      ? AppTheme.primary
+                      : settingsProvider.isDark
+                      ? AppTheme.white
+                      : AppTheme.grey,
+                  BlendMode.srcIn,
+                ),
               ),
         suffixIcon: widget.isPassword
             ? IconButton(
@@ -56,7 +69,9 @@ class _DefaultTextFormFieldState extends State<DefaultTextFormField> {
                   isObscure
                       ? Icons.visibility_outlined
                       : Icons.visibility_off_outlined,
-                  color: AppTheme.grey,
+                  color: settingsProvider.isDark
+                      ? AppTheme.white
+                      : AppTheme.grey,
                 ),
               )
             : null,

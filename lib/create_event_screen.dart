@@ -2,6 +2,7 @@ import 'package:evently/app_theme.dart';
 import 'package:evently/firebase_service.dart';
 import 'package:evently/models/category_model.dart';
 import 'package:evently/models/event_model.dart';
+import 'package:evently/providers/settings_provider.dart';
 import 'package:evently/tabs/home/tab_item.dart';
 import 'package:evently/ui_utils.dart';
 import 'package:evently/widgets/default_elevated_button.dart';
@@ -10,6 +11,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class CreateEventScreen extends StatefulWidget {
   static const String routeName = '/create-event';
@@ -30,6 +32,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     return Scaffold(
       appBar: AppBar(title: Text('Create Event')),
       body: Form(
@@ -72,7 +75,9 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                           isSelected:
                               CategoryModel.categories.indexOf(category) ==
                               currentIndex,
-                          selectedForegroundColor: AppTheme.white,
+                          selectedForegroundColor: settingsProvider.isDark
+                              ? AppTheme.backgroundDark
+                              : AppTheme.white,
                           unSelectedForegroundColor: AppTheme.primary,
                           selectedBackgroundColor: AppTheme.primary,
                         ),
@@ -114,7 +119,15 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                     SizedBox(height: 16),
                     Row(
                       children: [
-                        SvgPicture.asset('assets/icons/date.svg'),
+                        SvgPicture.asset(
+                          'assets/icons/date.svg',
+                          colorFilter: ColorFilter.mode(
+                            settingsProvider.isDark
+                                ? AppTheme.white
+                                : AppTheme.grey,
+                            BlendMode.srcIn,
+                          ),
+                        ),
                         SizedBox(width: 10),
                         Text('Event Date', style: textTheme.titleMedium),
                         Spacer(),
@@ -146,7 +159,15 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                     SizedBox(height: 16),
                     Row(
                       children: [
-                        SvgPicture.asset('assets/icons/time.svg'),
+                        SvgPicture.asset(
+                          'assets/icons/time.svg',
+                          colorFilter: ColorFilter.mode(
+                            settingsProvider.isDark
+                                ? AppTheme.white
+                                : AppTheme.grey,
+                            BlendMode.srcIn,
+                          ),
+                        ),
                         SizedBox(width: 10),
                         Text('Event Time', style: textTheme.titleMedium),
                         Spacer(),

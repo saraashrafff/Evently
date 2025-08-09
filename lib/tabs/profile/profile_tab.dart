@@ -1,11 +1,10 @@
 import 'package:evently/app_theme.dart';
 import 'package:evently/auth/login_screen.dart';
 import 'package:evently/firebase_service.dart';
-import 'package:evently/home_screen.dart';
+import 'package:evently/providers/settings_provider.dart';
 import 'package:evently/providers/user_provider.dart';
 import 'package:evently/tabs/profile/profile_header.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class ProfileTab extends StatelessWidget {
@@ -16,6 +15,7 @@ class ProfileTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,7 +35,9 @@ class ProfileTab extends StatelessWidget {
                       'Language',
                       style: textTheme.titleLarge!.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: AppTheme.black,
+                        color: settingsProvider.isDark
+                            ? AppTheme.white
+                            : AppTheme.black,
                       ),
                     ),
                     Container(
@@ -76,12 +78,18 @@ class ProfileTab extends StatelessWidget {
                       'Dark Theme',
                       style: textTheme.titleLarge!.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: AppTheme.black,
+                        color: settingsProvider.isDark
+                            ? AppTheme.white
+                            : AppTheme.black,
                       ),
                     ),
                     Switch(
-                      value: true,
-                      onChanged: (value) {},
+                      value: settingsProvider.isDark,
+                      onChanged: (isDark) {
+                        settingsProvider.changeTheme(
+                          isDark ? ThemeMode.dark : ThemeMode.light,
+                        );
+                      },
                       activeTrackColor: AppTheme.primary,
                     ),
                   ],

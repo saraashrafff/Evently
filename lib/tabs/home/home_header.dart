@@ -1,10 +1,9 @@
 import 'package:evently/app_theme.dart';
 import 'package:evently/models/category_model.dart';
-import 'package:evently/models/user_model.dart';
 import 'package:evently/providers/events_provider.dart';
+import 'package:evently/providers/settings_provider.dart';
 import 'package:evently/providers/user_provider.dart';
 import 'package:evently/tabs/home/tab_item.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,10 +17,13 @@ class _HomeHeaderState extends State<HomeHeader> {
   @override
   Widget build(BuildContext context) {
     EventProvider eventProvider = Provider.of<EventProvider>(context);
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     TextTheme textTheme = Theme.of(context).textTheme;
     return Container(
       decoration: BoxDecoration(
-        color: AppTheme.primary,
+        color: settingsProvider.isDark
+            ? AppTheme.backgroundDark
+            : AppTheme.primary,
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(24),
           bottomRight: Radius.circular(24),
@@ -60,9 +62,13 @@ class _HomeHeaderState extends State<HomeHeader> {
                     label: 'All',
                     icon: Icons.category,
                     isSelected: currentIndex == 0,
-                    selectedForegroundColor: AppTheme.primary,
+                    selectedForegroundColor: settingsProvider.isDark
+                        ? AppTheme.white
+                        : AppTheme.primary,
                     unSelectedForegroundColor: AppTheme.white,
-                    selectedBackgroundColor: AppTheme.white,
+                    selectedBackgroundColor: settingsProvider.isDark
+                        ? AppTheme.primary
+                        : AppTheme.white,
                   ),
                   ...CategoryModel.categories.map(
                     (category) => TabItem(
@@ -71,9 +77,13 @@ class _HomeHeaderState extends State<HomeHeader> {
                       isSelected:
                           currentIndex ==
                           CategoryModel.categories.indexOf(category) + 1,
-                      selectedForegroundColor: AppTheme.primary,
+                      selectedForegroundColor: settingsProvider.isDark
+                          ? AppTheme.white
+                          : AppTheme.primary,
                       unSelectedForegroundColor: AppTheme.white,
-                      selectedBackgroundColor: AppTheme.white,
+                      selectedBackgroundColor: settingsProvider.isDark
+                          ? AppTheme.primary
+                          : AppTheme.white,
                     ),
                   ),
                 ],

@@ -1,6 +1,8 @@
+import 'package:evently/app_theme.dart';
 import 'package:evently/auth/register_screen.dart';
 import 'package:evently/firebase_service.dart';
 import 'package:evently/home_screen.dart';
+import 'package:evently/providers/settings_provider.dart';
 import 'package:evently/providers/user_provider.dart';
 import 'package:evently/ui_utils.dart';
 import 'package:evently/widgets/default_elevated_button.dart';
@@ -23,6 +25,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
+
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
@@ -68,8 +72,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Don’t Have Account ?',
-                    style: TextTheme.of(context).titleMedium,
+                    'Don\'t Have Account ?',
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      color: settingsProvider.isDark
+                          ? AppTheme.white
+                          : AppTheme.black,
+                    ),
                   ),
                   TextButton(
                     onPressed: () {
