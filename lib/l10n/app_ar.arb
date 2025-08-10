@@ -39,10 +39,6 @@
     "descripitionCannotBeEmpty": "لا يمكن أن يكون الوصف فارغًا",
     "addevent": "إضافة حدث",
     "eventCreatedSuccessfully": "تم إنشاء الحدث بنجاح",
-<<<<<<< HEAD
     "failedToCreateEvent": "فشل في إنشاء الحدث",
     "letsStart": "لنبدأ"
-=======
-    "failedToCreateEvent": "فشل في إنشاء الحدث"
->>>>>>> d446320511a6ba9011007afd9d7fe05d6a8987d8
 }
