@@ -47,7 +47,6 @@ class _OnboardingScreensState extends State<OnboardingScreens> {
               child: PageView.builder(
                 controller: pageController,
                 physics: NeverScrollableScrollPhysics(),
-
                 onPageChanged: (index) {
                   setState(() {
                     currentIndex = index;

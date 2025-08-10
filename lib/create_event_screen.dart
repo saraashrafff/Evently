@@ -1,5 +1,6 @@
 import 'package:evently/app_theme.dart';
 import 'package:evently/firebase_service.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/models/category_model.dart';
 import 'package:evently/models/event_model.dart';
 import 'package:evently/providers/settings_provider.dart';
@@ -34,7 +35,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
     TextTheme textTheme = Theme.of(context).textTheme;
     SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     return Scaffold(
-      appBar: AppBar(title: Text('Create Event')),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.createEvent)),
       body: Form(
         key: formkey,
         child: SingleChildScrollView(
@@ -90,28 +91,38 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Title', style: textTheme.titleMedium),
+                    Text(
+                      AppLocalizations.of(context)!.title,
+                      style: textTheme.titleMedium,
+                    ),
                     SizedBox(height: 8),
                     DefaultTextFormField(
-                      hintText: 'Event Title',
+                      hintText: AppLocalizations.of(context)!.eventTitle,
                       prefixIconImageName: 'title',
                       controller: titleController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Title cannot be empty';
+                          return AppLocalizations.of(
+                            context,
+                          )!.titleCannotBeEmpty;
                         }
                         return null;
                       },
                     ),
                     SizedBox(height: 16),
-                    Text('Describtion', style: textTheme.titleMedium),
+                    Text(
+                      AppLocalizations.of(context)!.description,
+                      style: textTheme.titleMedium,
+                    ),
                     SizedBox(height: 8),
                     DefaultTextFormField(
-                      hintText: 'Event Description',
+                      hintText: AppLocalizations.of(context)!.eventDescription,
                       controller: describtionController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Descripition cannot be empty';
+                          return AppLocalizations.of(
+                            context,
+                          )!.descripitionCannotBeEmpty;
                         }
                         return null;
                       },
@@ -129,7 +140,10 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                           ),
                         ),
                         SizedBox(width: 10),
-                        Text('Event Date', style: textTheme.titleMedium),
+                        Text(
+                          AppLocalizations.of(context)!.eventDate,
+                          style: textTheme.titleMedium,
+                        ),
                         Spacer(),
                         InkWell(
                           onTap: () async {
@@ -147,7 +161,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                           },
                           child: Text(
                             selectedDate == null
-                                ? 'Select Date'
+                                ? AppLocalizations.of(context)!.selectDate
                                 : dateFormat.format(selectedDate!),
                             style: textTheme.titleMedium!.copyWith(
                               color: AppTheme.primary,
@@ -169,7 +183,10 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                           ),
                         ),
                         SizedBox(width: 10),
-                        Text('Event Time', style: textTheme.titleMedium),
+                        Text(
+                          AppLocalizations.of(context)!.eventTime,
+                          style: textTheme.titleMedium,
+                        ),
                         Spacer(),
                         InkWell(
                           onTap: () async {
@@ -184,7 +201,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                           },
                           child: Text(
                             selectedTime == null
-                                ? 'Select Time'
+                                ? AppLocalizations.of(context)!.selectTime
                                 : selectedTime!.format(context),
                             style: textTheme.titleMedium!.copyWith(
                               color: AppTheme.primary,
@@ -195,7 +212,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                     ),
                     SizedBox(height: 24),
                     DefaultElevatedButton(
-                      label: 'Add Event',
+                      label: AppLocalizations.of(context)!.addevent,
                       onPressed: createEvent,
                     ),
                   ],
@@ -229,10 +246,14 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
       FirebaseService.creatEvent(event)
           .then((_) {
             Navigator.of(context).pop();
-            UIUtils.showSuccessMessege('Event created successfully');
+            UIUtils.showSuccessMessege(
+              AppLocalizations.of(context)!.eventCreatedSuccessfully,
+            );
           })
           .catchError((_) {
-            UIUtils.showErrorMessege('Failed to create event');
+            UIUtils.showErrorMessege(
+              AppLocalizations.of(context)!.failedToCreateEvent,
+            );
           });
     }
   }
