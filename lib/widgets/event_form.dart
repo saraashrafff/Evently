@@ -23,6 +23,7 @@ class EventForm extends StatefulWidget {
   final void Function(DateTime) onDateChanged;
   final void Function(TimeOfDay) onTimeChanged;
   final VoidCallback onSubmit;
+  int? currentIndex;
 
   EventForm({
     required this.appBarTitle,
@@ -37,6 +38,7 @@ class EventForm extends StatefulWidget {
     required this.onDateChanged,
     required this.onTimeChanged,
     required this.onSubmit,
+    this.currentIndex,
   });
 
   @override
@@ -44,7 +46,15 @@ class EventForm extends StatefulWidget {
 }
 
 class _EventFormState extends State<EventForm> {
-  int currentIndex = 0;
+  late int currentIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    currentIndex =
+        widget.currentIndex ??
+        CategoryModel.categories.indexOf(widget.selectedCategory);
+  }
 
   DateFormat dateFormat = DateFormat('d/M/yyyy');
   @override
@@ -71,6 +81,7 @@ class _EventFormState extends State<EventForm> {
                 ),
               ),
               DefaultTabController(
+                initialIndex: currentIndex,
                 length: CategoryModel.categories.length,
                 child: TabBar(
                   isScrollable: true,

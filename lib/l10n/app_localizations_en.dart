@@ -149,4 +149,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get updateEvent => 'Update Event';
+
+  @override
+  String get eventUpdatedSuccessfully => 'Event updated successfully';
+
+  @override
+  String get failedToUpdateEvent => 'Failed to update event';
+
+  @override
+  String get eventDeletedSuccessfully => 'Event deleted successfully';
+
+  @override
+  String get failedToDeleteEvent => 'Failed to delete event';
 }

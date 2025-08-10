@@ -88,4 +88,16 @@ class FirebaseService {
       'favouriteEventsIds': FieldValue.arrayRemove([eventId]),
     });
   }
+
+  static Future<void> updateEvent(EventModel event) {
+    CollectionReference<EventModel> eventCollections = getEventsCollections();
+    DocumentReference<EventModel> doc = eventCollections.doc(event.id);
+    return doc.update(event.toJson());
+  }
+
+  static Future<void> deleteEvent(EventModel event) {
+    CollectionReference<EventModel> eventCollections = getEventsCollections();
+    DocumentReference<EventModel> doc = eventCollections.doc(event.id);
+    return doc.delete();
+  }
 }

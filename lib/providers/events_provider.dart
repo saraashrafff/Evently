@@ -31,4 +31,18 @@ class EventProvider with ChangeNotifier {
         .toList();
     notifyListeners();
   }
+
+  void addEvent(EventModel event) {
+    allEvents.add(event);
+    allEvents.sort((a, b) => a.dateTime.compareTo(b.dateTime));
+    displayedEvents = List.from(allEvents);
+    notifyListeners();
+  }
+
+  void removeEvent(String eventId) {
+    allEvents.removeWhere((event) => event.id == eventId);
+    displayedEvents.removeWhere((event) => event.id == eventId);
+    favouriteEvents.removeWhere((event) => event.id == eventId);
+    notifyListeners();
+  }
 }

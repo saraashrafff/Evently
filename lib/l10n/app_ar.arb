@@ -40,5 +40,12 @@
     "addevent": "إضافة حدث",
     "eventCreatedSuccessfully": "تم إنشاء الحدث بنجاح",
     "failedToCreateEvent": "فشل في إنشاء الحدث",
-    "letsStart": "لنبدأ"
+    "letsStart": "لنبدأ",
+    "eventDetails": "تفاصيل الحدث",
+    "editEvent": "تعديل الحدث",
+    "updateEvent": "تحديث الحدث",
+    "eventUpdatedSuccessfully": "تم تحديث الحدث بنجاح",
+    "failedToUpdateEvent": "فشل في تحديث الحدث",
+    "eventDeletedSuccessfully": "تم حذف الحدث بنجاح",
+    "failedToDeleteEvent": "فشل في حذف الحدث"
 }

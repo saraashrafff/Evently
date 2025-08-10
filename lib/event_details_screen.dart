@@ -1,26 +1,50 @@
 import 'package:evently/app_theme.dart';
 import 'package:evently/edit_event_screen.dart';
+import 'package:evently/firebase_service.dart';
+import 'package:evently/l10n/app_localizations.dart';
+import 'package:evently/models/event_model.dart';
+import 'package:evently/providers/events_provider.dart';
+import 'package:evently/ui_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class EventDetailsScreen extends StatelessWidget {
   static const routeName = '/event-details';
   @override
   Widget build(BuildContext context) {
+    EventProvider eventProvider = Provider.of<EventProvider>(context);
     TextTheme textTheme = Theme.of(context).textTheme;
-
+    EventModel event = ModalRoute.of(context)!.settings.arguments as EventModel;
     return Scaffold(
       appBar: AppBar(
         title: Text('Event Details'),
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.of(context).pushNamed(EditEventScreen.routeName);
+              Navigator.of(
+                context,
+              ).pushNamed(EditEventScreen.routeName, arguments: event);
             },
             icon: Icon(Icons.edit),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              eventProvider.removeEvent(event.id);
+              FirebaseService.deleteEvent(event)
+                  .then((_) {
+                    Navigator.of(context).pop();
+                    UIUtils.showSuccessMessege(
+                      AppLocalizations.of(context)!.eventDeletedSuccessfully,
+                    );
+                  })
+                  .catchError((_) {
+                    UIUtils.showErrorMessege(
+                      AppLocalizations.of(context)!.failedToDeleteEvent,
+                    );
+                  });
+            },
             icon: Icon(Icons.delete, color: AppTheme.red),
           ),
         ],
@@ -32,7 +56,7 @@ class EventDetailsScreen extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(16),
               child: Image.asset(
-                'assets/images/sport.png',
+                'assets/images/${event.category.imageName}.png',
                 height: MediaQuery.sizeOf(context).height * 0.23,
                 width: double.infinity,
                 fit: BoxFit.fill,
@@ -40,7 +64,7 @@ class EventDetailsScreen extends StatelessWidget {
             ),
             SizedBox(height: 16),
             Text(
-              'Event Title',
+              event.title,
               style: textTheme.headlineSmall!.copyWith(
                 color: AppTheme.primary,
                 fontWeight: FontWeight.w500,
@@ -74,14 +98,14 @@ class EventDetailsScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '21 Novamber 2025',
+                        DateFormat('d MMMM yyyy').format(event.dateTime),
                         style: textTheme.titleMedium!.copyWith(
                           color: AppTheme.primary,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
                       Text(
-                        '12:12 PM',
+                        DateFormat('h:mm a').format(event.dateTime),
                         style: textTheme.titleMedium!.copyWith(
                           fontWeight: FontWeight.w500,
                         ),
@@ -102,11 +126,10 @@ class EventDetailsScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 8),
-
             SizedBox(
               width: double.infinity,
               child: Text(
-                'Description Details',
+                event.description,
                 style: textTheme.titleMedium,
                 textAlign: TextAlign.start,
               ),

@@ -45,5 +45,9 @@
     "letsStart": "Let's Start",
     "eventDetails": "Event Details",
     "editEvent": "Edit Event",
-    "updateEvent": "Update Event"
+    "updateEvent": "Update Event",
+    "eventUpdatedSuccessfully": "Event updated successfully",
+    "failedToUpdateEvent": "Failed to update event",
+    "eventDeletedSuccessfully": "Event deleted successfully",
+    "failedToDeleteEvent": "Failed to delete event"
 }

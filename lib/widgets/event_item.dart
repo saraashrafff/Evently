@@ -1,4 +1,5 @@
 import 'package:evently/app_theme.dart';
+import 'package:evently/event_details_screen.dart';
 import 'package:evently/models/event_model.dart';
 import 'package:evently/providers/events_provider.dart';
 import 'package:evently/providers/settings_provider.dart';
@@ -17,106 +18,111 @@ class EventItem extends StatelessWidget {
     bool isFavourite = userProvider.checkIfFavouriteEvent(event.id);
     Size screenSize = MediaQuery.sizeOf(context);
     TextTheme textTheme = Theme.of(context).textTheme;
-    return Container(
-      decoration: BoxDecoration(
-        border: settingsProvider.isDark
-            ? Border.all(color: AppTheme.primary)
-            : null,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Stack(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(16),
-            child: Image.asset(
-              'assets/images/${event.category.imageName}.png',
-              height: screenSize.height * 0.23,
-              width: double.infinity,
-              fit: BoxFit.fill,
+    return InkWell(
+      onTap: () => Navigator.of(
+        context,
+      ).pushNamed(EventDetailsScreen.routeName, arguments: event),
+      child: Container(
+        decoration: BoxDecoration(
+          border: settingsProvider.isDark
+              ? Border.all(color: AppTheme.primary)
+              : null,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Stack(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Image.asset(
+                'assets/images/${event.category.imageName}.png',
+                height: screenSize.height * 0.23,
+                width: double.infinity,
+                fit: BoxFit.fill,
+              ),
             ),
-          ),
-          Container(
-            padding: EdgeInsets.all(8),
-            margin: EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: settingsProvider.isDark
-                  ? AppTheme.backgroundDark
-                  : AppTheme.white,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Column(
-              children: [
-                Text(
-                  '${event.dateTime.day}',
-                  style: textTheme.titleLarge!.copyWith(
-                    color: AppTheme.primary,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  DateFormat('MMM').format(event.dateTime),
-                  style: textTheme.titleSmall!.copyWith(
-                    color: AppTheme.primary,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Positioned(
-            width: screenSize.width - 32,
-            bottom: 8,
-            child: Container(
+            Container(
               padding: EdgeInsets.all(8),
-              margin: EdgeInsets.symmetric(horizontal: 8),
+              margin: EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: settingsProvider.isDark
                     ? AppTheme.backgroundDark
                     : AppTheme.white,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Column(
                 children: [
-                  Expanded(
-                    child: Text(
-                      event.title,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: textTheme.titleSmall!.copyWith(
-                        color: settingsProvider.isDark
-                            ? AppTheme.white
-                            : AppTheme.black,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  Text(
+                    '${event.dateTime.day}',
+                    style: textTheme.titleLarge!.copyWith(
+                      color: AppTheme.primary,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(width: 8),
-                  InkWell(
-                    onTap: () {
-                      if (isFavourite) {
-                        userProvider.removeEventToFavourite(event.id);
-                        Provider.of<EventProvider>(
-                          context,
-                          listen: false,
-                        ).filterFavouriteEvents(
-                          userProvider.currentUser!.favouriteEventsIds,
-                        );
-                      } else {
-                        userProvider.addEventToFavourite(event.id);
-                      }
-                    },
-                    child: Icon(
-                      isFavourite ? Icons.favorite : Icons.favorite_outline,
+                  Text(
+                    DateFormat('MMM').format(event.dateTime),
+                    style: textTheme.titleSmall!.copyWith(
                       color: AppTheme.primary,
-                      size: 24,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
               ),
             ),
-          ),
-        ],
+            Positioned(
+              width: screenSize.width - 32,
+              bottom: 8,
+              child: Container(
+                padding: EdgeInsets.all(8),
+                margin: EdgeInsets.symmetric(horizontal: 8),
+                decoration: BoxDecoration(
+                  color: settingsProvider.isDark
+                      ? AppTheme.backgroundDark
+                      : AppTheme.white,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        event.title,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: textTheme.titleSmall!.copyWith(
+                          color: settingsProvider.isDark
+                              ? AppTheme.white
+                              : AppTheme.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 8),
+                    InkWell(
+                      onTap: () {
+                        if (isFavourite) {
+                          userProvider.removeEventToFavourite(event.id);
+                          Provider.of<EventProvider>(
+                            context,
+                            listen: false,
+                          ).filterFavouriteEvents(
+                            userProvider.currentUser!.favouriteEventsIds,
+                          );
+                        } else {
+                          userProvider.addEventToFavourite(event.id);
+                        }
+                      },
+                      child: Icon(
+                        isFavourite ? Icons.favorite : Icons.favorite_outline,
+                        color: AppTheme.primary,
+                        size: 24,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

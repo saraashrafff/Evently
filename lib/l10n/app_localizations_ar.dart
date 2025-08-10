@@ -142,11 +142,23 @@ class AppLocalizationsAr extends AppLocalizations {
   String get letsStart => 'لنبدأ';
 
   @override
-  String get eventDetails => 'Event Details';
+  String get eventDetails => 'تفاصيل الحدث';
 
   @override
-  String get editEvent => 'Edit Event';
+  String get editEvent => 'تعديل الحدث';
 
   @override
-  String get updateEvent => 'Update Event';
+  String get updateEvent => 'تحديث الحدث';
+
+  @override
+  String get eventUpdatedSuccessfully => 'تم تحديث الحدث بنجاح';
+
+  @override
+  String get failedToUpdateEvent => 'فشل في تحديث الحدث';
+
+  @override
+  String get eventDeletedSuccessfully => 'تم حذف الحدث بنجاح';
+
+  @override
+  String get failedToDeleteEvent => 'فشل في حذف الحدث';
 }

@@ -379,6 +379,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Update Event'**
   String get updateEvent;
+
+  /// No description provided for @eventUpdatedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Event updated successfully'**
+  String get eventUpdatedSuccessfully;
+
+  /// No description provided for @failedToUpdateEvent.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to update event'**
+  String get failedToUpdateEvent;
+
+  /// No description provided for @eventDeletedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Event deleted successfully'**
+  String get eventDeletedSuccessfully;
+
+  /// No description provided for @failedToDeleteEvent.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to delete event'**
+  String get failedToDeleteEvent;
 }
 
 class _AppLocalizationsDelegate
