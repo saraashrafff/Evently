@@ -1,3 +1,4 @@
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/onboarding/onboarding.dart';
 import 'package:evently/onboarding/onboardingItem.dart';
 import 'package:evently/onboarding/onboarding_screens.dart';
@@ -26,7 +27,7 @@ class StartOnboarding extends StatelessWidget {
             OnboardingItem(onboarding: onboardingPages[0], index: 0),
             Spacer(),
             DefaultElevatedButton(
-              label: 'Let\'s Start',
+              label: AppLocalizations.of(context)!.letsStart,
               style: Theme.of(context).textTheme.titleLarge,
               onPressed: () {
                 Navigator.of(

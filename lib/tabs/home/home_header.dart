@@ -1,4 +1,5 @@
 import 'package:evently/app_theme.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/models/category_model.dart';
 import 'package:evently/providers/events_provider.dart';
 import 'package:evently/providers/settings_provider.dart';
@@ -29,12 +30,15 @@ class _HomeHeaderState extends State<HomeHeader> {
           bottomRight: Radius.circular(24),
         ),
       ),
-      padding: EdgeInsets.only(bottom: 16, left: 16),
+      padding: EdgeInsetsDirectional.only(bottom: 16, start: 16),
       child: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Welcome Back ✨', style: textTheme.titleSmall),
+            Text(
+              AppLocalizations.of(context)!.welcomeBack,
+              style: textTheme.titleSmall,
+            ),
             Text(
               Provider.of<UserProvider>(context).currentUser!.name,
               style: textTheme.headlineSmall,
@@ -59,7 +63,7 @@ class _HomeHeaderState extends State<HomeHeader> {
                 },
                 tabs: [
                   TabItem(
-                    label: 'All',
+                    label: AppLocalizations.of(context)!.all,
                     icon: Icons.category,
                     isSelected: currentIndex == 0,
                     selectedForegroundColor: settingsProvider.isDark

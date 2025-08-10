@@ -1,6 +1,7 @@
 import 'package:evently/auth/login_screen.dart';
 import 'package:evently/firebase_service.dart';
 import 'package:evently/home_screen.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/providers/user_provider.dart';
 import 'package:evently/ui_utils.dart';
 import 'package:evently/widgets/default_elevated_button.dart';
@@ -37,7 +38,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               SizedBox(height: 24),
               DefaultTextFormField(
-                hintText: 'Name',
+                hintText: AppLocalizations.of(context)!.name,
                 prefixIconImageName: 'name',
                 controller: nameController,
                 validator: (value) {
@@ -49,31 +50,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               SizedBox(height: 16),
               DefaultTextFormField(
-                hintText: 'Email',
+                hintText: AppLocalizations.of(context)!.email,
                 prefixIconImageName: 'email',
                 controller: emailController,
                 validator: (value) {
                   if (value == null || value.length < 5) {
-                    return 'Invalid email';
+                    return AppLocalizations.of(context)!.invalidEmail;
                   }
                   return null;
                 },
               ),
               SizedBox(height: 16),
               DefaultTextFormField(
-                hintText: 'Password',
+                hintText: AppLocalizations.of(context)!.password,
                 prefixIconImageName: 'password',
                 controller: passwordController,
                 validator: (value) {
                   if (value == null || value.length < 8) {
-                    return 'Password must be at least 8 characters';
+                    return AppLocalizations.of(
+                      context,
+                    )!.passwordMustBeAtLeast8Characters;
                   }
                   return null;
                 },
               ),
               SizedBox(height: 24),
               DefaultElevatedButton(
-                label: 'Create Account',
+                label: AppLocalizations.of(context)!.createAccount,
                 onPressed: register,
               ),
               SizedBox(height: 20),
@@ -81,7 +84,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Already Have Account ?',
+                    AppLocalizations.of(context)!.alreadyHaveAccount,
                     style: TextTheme.of(context).titleMedium,
                   ),
                   TextButton(
@@ -91,7 +94,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         LoginScreen.routeName,
                       );
                     },
-                    child: Text('Login'),
+                    child: Text(AppLocalizations.of(context)!.login),
                   ),
                 ],
               ),

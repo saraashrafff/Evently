@@ -11,13 +11,16 @@ class ProfileHeader extends StatelessWidget {
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: AppTheme.primary,
-        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(64)),
+        borderRadius: BorderRadiusDirectional.only(
+          bottomStart: Radius.circular(64),
+        ),
       ),
       child: SafeArea(
         child: Row(
           children: [
             Image.asset(
               'assets/images/route_logo.png',
+
               height: MediaQuery.sizeOf(context).height * 0.12,
               fit: BoxFit.fill,
             ),
