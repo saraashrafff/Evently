@@ -139,5 +139,5 @@ class AppLocalizationsAr extends AppLocalizations {
   String get failedToCreateEvent => 'فشل في إنشاء الحدث';
 
   @override
-  String get letsStart => 'Let\'s Start';
+  String get letsStart => 'لنبدأ';
 }
