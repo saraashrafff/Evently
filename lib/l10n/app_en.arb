@@ -42,5 +42,6 @@
     "addevent": "Add Event",
     "eventCreatedSuccessfully": "Event created successfully",
     "failedToCreateEvent": "Failed to create event",
-    "letsStart": "Let's Start"
+    "letsStart": "Let's Start",
+    "eventDetails": "Event Details"
 }

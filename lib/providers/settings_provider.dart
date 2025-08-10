@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class SettingsProvider with ChangeNotifier {
   ThemeMode themeMode = ThemeMode.light;
-  String languageCode = 'ar';
+  String languageCode = 'en';
 
   bool get isDark => themeMode == ThemeMode.dark;
 

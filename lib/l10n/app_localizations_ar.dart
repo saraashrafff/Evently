@@ -140,4 +140,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get letsStart => 'لنبدأ';
+
+  @override
+  String get eventDetails => 'Event Details';
 }
