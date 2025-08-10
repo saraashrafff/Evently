@@ -143,4 +143,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get eventDetails => 'Event Details';
+
+  @override
+  String get editEvent => 'Edit Event';
+
+  @override
+  String get updateEvent => 'Update Event';
 }

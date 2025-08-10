@@ -43,5 +43,7 @@
     "eventCreatedSuccessfully": "Event created successfully",
     "failedToCreateEvent": "Failed to create event",
     "letsStart": "Let's Start",
-    "eventDetails": "Event Details"
+    "eventDetails": "Event Details",
+    "editEvent": "Edit Event",
+    "updateEvent": "Update Event"
 }

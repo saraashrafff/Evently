@@ -54,7 +54,7 @@ class Evently extends StatelessWidget {
       },
       initialRoute: isFirstRun
           ? StartOnboarding.routeName
-          : EventDetailsScreen.routeName,
+          : LoginScreen.routeName,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: settingsProvider.themeMode,
